@@ -16,13 +16,18 @@ START_LENGTH=5
 
 pos_list=[]
 stamp_list=[]
+pos_list1=[]
+stamp_list1=[]
 food_pos=[]
 food_stamps=[]
 score=0
 score_list=[]
 snake=turtle.clone()
 snake.shape("square")
-
+snake.color("blue")
+snake1=turtle.clone()
+snake1.shape("square")
+snake1.color("red")
 turtle.hideturtle()
 
 for loop1 in range(START_LENGTH):
@@ -36,8 +41,18 @@ for loop1 in range(START_LENGTH):
     stamp1=snake.stamp()
     stamp_list.append(stamp1)
 
-UP_ARROW="Up"
+for loop2 in range(START_LENGTH):
+    x_pos=snake1.pos()[0]
+    y_pos=snake1.pos()[1]
+    x_pos+=SQUARE_SIZE
+    my_pos=(x_pos,y_pos)
+    snake1.goto(x_pos,y_pos)
 
+    pos_list1.append(my_pos)
+    stamp1=snake.stamp()
+    stamp_list1.append(stamp1)
+    
+UP_ARROW="Up"
 LEFT_ARROW="Left"
 DOWN_ARROW="Down"
 RIGHT_ARROW="Right"
