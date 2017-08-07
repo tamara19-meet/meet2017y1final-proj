@@ -24,9 +24,11 @@ score = []
 
 snake = turtle.clone()
 snake.shape("square")
+snake.color('red')
 
 snake1 = turtle.clone()
 snake1.shape("square")
+snake1.color('green')
 
 turtle.hideturtle()
 
@@ -55,13 +57,13 @@ LEFT_ARROW = "Left"
 DOWN_ARROW = "Down"
 RIGHT_ARROW = "Right"
 
-RIGHT_ARROW1 = "D"
-LEFT_ARROW1 = "A"
-UP_ARROW1 = "W"
-DOWN_ARROW1 = "S"
+RIGHT_ARROW1 = "d"
+LEFT_ARROW1 = "a"
+UP_ARROW1 = "w"
+DOWN_ARROW1 = "s"
 
 
-TIME_STEP = 100
+TIME_STEP = 50
 SPACEBAR = "space"
 
 UP = 0
@@ -322,3 +324,4 @@ def move_snake1():
 move_snake()
 move_snake1()
 make_food()
+
