@@ -16,12 +16,17 @@ start_length = 5
 
 pos_list = []
 stamp_list = []
+pos_list1 = []
+stamp_list1 = []
 food_pos = []
 food_stamp = []
 score = []
 
 snake = turtle.clone()
 snake.shape("square")
+
+snake1 = turtle.clone()
+snake1.shape("square")
 
 turtle.hideturtle()
 
@@ -35,10 +40,27 @@ for num in range(start_length):
         stamp_id = snake.stamp()
         stamp_list.append(stamp_id)
 
+for num1 in range(start_length):
+        x_pos1 = snake1.pos()[0]
+        y_pos1 = snake1.pos()[1]
+        x_pos1 = x_pos1 + square_size
+        my_pos1 = (x_pos1, y_pos1)
+        snake1.goto(my_pos1)
+        pos_list1.append(my_pos1)
+        stamp_id1 = snake1.stamp()
+        stamp_list1.append(stamp_id1)
+
 UP_ARROW = "Up"
 LEFT_ARROW = "Left"
 DOWN_ARROW = "Down"
 RIGHT_ARROW = "Right"
+
+RIGHT_ARROW1 = "D"
+LEFT_ARROW1 = "A"
+UP_ARROW1 = "W"
+DOWN_ARROW1 = "S"
+
+
 TIME_STEP = 100
 SPACEBAR = "space"
 
@@ -47,7 +69,13 @@ LEFT = 1
 DOWN = 2
 RIGHT = 3
 
+UP1 = 4
+LEFT1 = 5
+DOWN1 = 6
+RIGHT1 = 7
+
 direction = UP
+direction1 = DOWN1
 
 UP_EDGE = 250
 DOWN_EDGE = -250
@@ -76,13 +104,41 @@ def right():
         direction = RIGHT
         print("You pressed the right key!")
 
-#make turtle listen
+
+def up1():
+    global direction1
+    if direction1 != DOWN1:
+        direction1 = UP1
+        print("Player2 pressed the up key!")
+def left1():
+    global direction1
+    if direction1 != RIGHT1:
+        direction1 = LEFT1
+        print("You pressed the left key!")
+def down1():
+    global direction1
+    if direction1 != UP1:
+        direction1 = DOWN1
+        print("You pressed the down key!")
+def right1():
+    global direction1
+    if direction1 != LEFT1:
+        direction1 = RIGHT1
+        print("You pressed the right key!")
+
+#make turtle listen snake
 turtle.onkeypress(up, UP_ARROW)
 turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(down, DOWN_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
 
+#make turtle listen snake1
+turtle.onkeypress(up1, UP_ARROW1)
+turtle.onkeypress(left1, LEFT_ARROW1)
+turtle.onkeypress(down1, DOWN_ARROW1)
+turtle.onkeypress(right1, RIGHT_ARROW1)
+turtle.listen()
 
 #location of food
 
@@ -108,8 +164,10 @@ def make_food():
     food_stamps.append(food_id)
     food_pos.append(pos_food)
 
-#make turtle move
+#make turtle move snake
 def move_snake():
+
+    global direction
     my_pos = snake.pos()
     x_pos = my_pos[0]
     y_pos = my_pos[1]
@@ -183,5 +241,84 @@ def move_snake():
         
     turtle.ontimer(move_snake, TIME_STEP)
 
+def move_snake1():
+
+    global direction1
+    my_pos1 = snake1.pos()
+    x_pos1 = my_pos1[0]
+    y_pos1 = my_pos1[1]
+    
+    if direction1 == RIGHT1:
+        print("player2 is moving")
+        snake1.goto(x_pos1 + square_size, y_pos1)
+        print("You moved right!")
+    elif direction1 == LEFT1:
+        snake1.goto(x_pos1 - square_size, y_pos1)
+        print("You moved left!")
+    elif direction1 == UP1:
+        snake1.goto(x_pos1, y_pos1 + square_size)
+        print("You moved up!")
+    elif direction1 == DOWN1:
+        snake1.goto(x_pos1, y_pos1 - square_size)
+        print("You moved down!")
+
+    # stamp and record the snake's head
+    my_pos1 = snake1.pos()
+    pos_list1.append(my_pos1)
+    new_stamp1 = snake1.stamp()
+    stamp_list1.append(new_stamp1)
+
+    # if the snake is eating food
+    if snake1.pos() in food_pos:
+        food_ind1 = food_pos.index(snake1.pos())
+        food.clearstamp(food_stamps[food_ind1])
+        food_pos.pop(food_ind1)
+        score.append(food_ind1)
+        food_stamps.pop(food_ind1)
+        print("You have eaten a food!")
+        make_food()
+        turtle.clear()
+        turtle.goto(200, 200)
+        turtle.write(len(score), font = ("Arial", 30))
+        turtle .goto(-300, 0)
+    else:
+        # cleartsamps the tail and makes storage edits
+        old_stamp1 = stamp_list1.pop(0)
+        snake1.clearstamp(old_stamp1)
+        pos_list1.pop(0)
+
+    new_pos1 = snake1.pos()
+    new_x_pos1 = new_pos1[0]
+    new_y_pos1 = new_pos1[1]
+
+    if new_x_pos1 >= RIGHT_EDGE:
+        turtle.write("You hit the right edge! game over!", font = ("Ariel", 30))
+        time.sleep(2)
+        quit()
+
+    elif new_x_pos1 <= LEFT_EDGE:
+        turtle.write("You hit the left edge! game over!", font = ("Ariel", 30))
+        time.sleep(2)
+        quit()
+
+    elif new_y_pos1 >= UP_EDGE:
+        turtle.write("You hit the up edge! game over!", font = ("Ariel", 30))
+        time.sleep(2)
+        quit()
+
+    elif new_y_pos1 <= DOWN_EDGE:
+        turtle.write("You hit the down edge! game over!", font = ("Ariel", 30))
+        time.sleep(2)
+        quit(pos_list)
+        
+    if pos_list1[-1] in pos_list1[0:-1]:
+        turtle.write("you hit yourself!", font = ("Ariel", 30))
+        time.sleep(2)
+        quit()
+        
+    turtle.ontimer(move_snake1, TIME_STEP)
+
+
 move_snake()
+move_snake1()
 make_food()
