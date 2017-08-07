@@ -68,6 +68,7 @@ DOWN_ARROW1 = "s"
 
 
 TIME_STEP = 50
+TIME_STEP1=200
 SPACEBAR = "space"
 
 UP = 0
@@ -335,7 +336,7 @@ def move_snake1():
         time.sleep(2)
         quit()
         
-    turtle.ontimer(move_snake1, TIME_STEP)
+    turtle.ontimer(move_snake1, TIME_STEP1)
 
 
 move_snake()
