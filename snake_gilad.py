@@ -5,10 +5,11 @@ import time
 
 turtle.tracer(1, 0)
 
-size_X = 800
-size_Y = 500
-turtle.setup(size_X, size_Y)
-
+size_X1 = 1000
+size_Y1 = 700
+turtle.setup(size_X1, size_Y1)
+size_X=700
+size_Y=400
 turtle.penup()
 
 square_size = 20
@@ -21,6 +22,9 @@ stamp_list1 = []
 food_pos = []
 food_stamp = []
 score = []
+score1 = []
+
+turtle1 = turtle.clone()
 
 snake = turtle.clone()
 snake.shape("square")
@@ -31,7 +35,7 @@ snake1.shape("square")
 snake1.color('green')
 
 turtle.hideturtle()
-
+turtle1.hideturtle()
 for num in range(start_length):
         x_pos = snake.pos()[0]
         y_pos = snake.pos()[1]
@@ -79,10 +83,22 @@ RIGHT1 = 7
 direction = UP
 direction1 = DOWN1
 
-UP_EDGE = 250
-DOWN_EDGE = -250
-RIGHT_EDGE = 400
-LEFT_EDGE = -400
+UP_EDGE = 300
+DOWN_EDGE = -300
+RIGHT_EDGE = 450
+LEFT_EDGE = -450
+
+box=turtle.clone()
+box.shape("blank")
+box.pensize(2)
+box.color("blue")
+box.penup()
+box.goto(-450,300)
+box.pendown()
+box.goto(450,300)
+box.goto(450,-300)
+box.goto(-450,-300)
+box.goto(-450,300)
 
 #call functions
 def up():
@@ -144,8 +160,9 @@ turtle.listen()
 
 #location of food
 
-food = turtle.clone()
-food.shape("circle")
+turtle.register_shape("sushi.gif")
+food=turtle.clone()
+food.shape("sushi.gif")
 food.hideturtle()
 food_pos = []
 food_stamps = []
@@ -217,27 +234,27 @@ def move_snake():
     new_y_pos = new_pos[1]
 
     if new_x_pos >= RIGHT_EDGE:
-        turtle.write("You hit the right edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 1 hit the right edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_x_pos <= LEFT_EDGE:
-        turtle.write("You hit the left edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 1 hit the left edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos >= UP_EDGE:
-        turtle.write("You hit the up edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 1 hit the up edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos <= DOWN_EDGE:
-        turtle.write("You hit the down edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 1 hit the down edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit(pos_list)
         
     if pos_list[-1] in pos_list[0:-1]:
-        turtle.write("you hit yourself!", font = ("Ariel", 30))
+        turtle.write("Player 1 hit yourself!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
         
@@ -275,14 +292,14 @@ def move_snake1():
         food_ind1 = food_pos.index(snake1.pos())
         food.clearstamp(food_stamps[food_ind1])
         food_pos.pop(food_ind1)
-        score.append(food_ind1)
+        score1.append(food_ind1)
         food_stamps.pop(food_ind1)
         print("You have eaten a food!")
         make_food()
-        turtle.clear()
-        turtle.goto(200, 200)
-        turtle.write(len(score), font = ("Arial", 30))
-        turtle .goto(-300, 0)
+        turtle1.clear()
+        turtle1.goto(-200, 200)
+        turtle1.write(len(score1), font = ("Arial", 30), align="center")
+        turtle1.goto(-300, 0)
     else:
         # cleartsamps the tail and makes storage edits
         old_stamp1 = stamp_list1.pop(0)
@@ -294,27 +311,27 @@ def move_snake1():
     new_y_pos1 = new_pos1[1]
 
     if new_x_pos1 >= RIGHT_EDGE:
-        turtle.write("You hit the right edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 2 hit the right edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_x_pos1 <= LEFT_EDGE:
-        turtle.write("You hit the left edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 2 hit the left edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos1 >= UP_EDGE:
-        turtle.write("You hit the up edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 2 hit the up edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos1 <= DOWN_EDGE:
-        turtle.write("You hit the down edge! game over!", font = ("Ariel", 30))
+        turtle.write("Player 2 hit the down edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit(pos_list)
         
     if pos_list1[-1] in pos_list1[0:-1]:
-        turtle.write("you hit yourself!", font = ("Ariel", 30))
+        turtle.write("Player 2 hit yourself!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
         
