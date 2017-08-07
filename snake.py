@@ -41,7 +41,7 @@ for loop1 in range(START_LENGTH):
     stamp1=snake.stamp()
     stamp_list.append(stamp1)
 
-for loop2 in range(START_LENGTH):
+'''for loop2 in range(START_LENGTH):
     x_pos=snake1.pos()[0]
     y_pos=snake1.pos()[1]
     x_pos+=SQUARE_SIZE
@@ -50,12 +50,13 @@ for loop2 in range(START_LENGTH):
 
     pos_list1.append(my_pos)
     stamp1=snake.stamp()
-    stamp_list1.append(stamp1)
+    stamp_list1.append(stamp1)'''
     
 UP_ARROW="Up"
 LEFT_ARROW="Left"
 DOWN_ARROW="Down"
 RIGHT_ARROW="Right"
+
 TIME_STEP=100
 SPACEBAR="space"
 UP=0
