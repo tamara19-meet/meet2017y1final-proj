@@ -159,8 +159,9 @@ turtle.listen()
 
 #location of food
 
+turtle.register_shape("1f363.png")
 food = turtle.clone()
-food.shape("circle")
+food.shape("1f363.png")
 food.hideturtle()
 food_pos = []
 food_stamps = []
@@ -179,6 +180,7 @@ def make_food():
     food.goto(food_x, food_y)
     food_id = food.stamp()
     food_stamps.append(food_id)
+                                 
     food_pos.append(pos_food)
 
 #make turtle move snake
