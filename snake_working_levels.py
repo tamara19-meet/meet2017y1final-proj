@@ -4,7 +4,7 @@ import time
 
 
 
-level = input('pick a level 1/2')
+level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2")
 if level == '1':
     TIME_STEP = 100
     TIME_STEP1 = 100
