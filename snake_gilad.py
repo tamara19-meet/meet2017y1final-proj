@@ -70,7 +70,10 @@ DOWN_ARROW1 = "s"
 
 TIME_STEP = 100
 TIME_STEP1 = 100
+<<<<<<< HEAD
 
+=======
+>>>>>>> 98befa20549bf32907bc390cdfd491f25a079bb5
 TIME_STEP = 50
 TIME_STEP1=200
 
