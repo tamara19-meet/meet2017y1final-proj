@@ -1,7 +1,7 @@
 import turtle
 import random
 import time
-
+  
 
 
 level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2")
