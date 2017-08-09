@@ -67,13 +67,13 @@ UP_ARROW1 = "w"
 DOWN_ARROW1 = "s"
 
 
-<<<<<<< HEAD
+
 TIME_STEP = 100
 TIME_STEP1 = 100
-=======
+
 TIME_STEP = 50
 TIME_STEP1=200
->>>>>>> ef82aba641bcce91d788fe9b70fe960b46edce74
+
 SPACEBAR = "space"
 
 UP = 0
