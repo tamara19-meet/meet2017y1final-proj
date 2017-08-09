@@ -15,7 +15,8 @@ turtle.penup()
 
 square_size = 20
 start_length = 5
-
+wn=turtle.Screen()
+wn.title("2 players snake")
 pos_list = []
 stamp_list = []
 pos_list1 = []
@@ -98,11 +99,9 @@ DOWN_ARROW1 = "s"
 
 
 
-TIME_STEP = 100
-TIME_STEP1 = 100
-
 TIME_STEP = 50
-TIME_STEP1=200
+TIME_STEP1 = 50
+
 
 SPACEBAR = "space"
 
