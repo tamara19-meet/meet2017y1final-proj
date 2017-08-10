@@ -8,9 +8,7 @@ pygame.init()
 pygame.mixer.music.load("TheFatRat - Unity.mp3")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
-print("play music")
-  
-
+#print("play music")
 
 level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2 and press enter")
 if level == '1':
@@ -29,11 +27,12 @@ size_X=700
 size_Y=400
 turtle.penup()
 
+start = 1
 
 square_size = 20
 start_length = 5
 wn=turtle.Screen()
-wn.title("2 players snake")
+wn.title("TDGM Snake")
 
 
 pos_list = []
@@ -52,6 +51,40 @@ turtle3= turtle.clone()
 turtle3.hideturtle()
 turtle2 = turtle.clone()
 turtle2.hideturtle()
+turtle4 = turtle.clone()
+turtle4.hideturtle()
+
+def clear_text():
+    global start
+    turtle.clear()
+    turtle1.clear()
+    turtle2.clear()
+    turtle3.clear()
+    turtle4.clear()
+    if start == 1:
+        for num in range(start_length):
+            x_pos = snake.pos()[0]
+            y_pos = snake.pos()[1]
+            x_pos = x_pos + square_size
+            my_pos = (x_pos, y_pos)
+            snake.goto(my_pos)
+            pos_list.append(my_pos)
+            stamp_id = snake.stamp()
+            stamp_list.append(stamp_id)
+
+        for num1 in range(start_length):
+            x_pos1 = snake1.pos()[0]
+            y_pos1 = snake1.pos()[1]
+            x_pos1 = x_pos1 + square_size
+            my_pos1 = (x_pos1, y_pos1)
+            snake1.goto(my_pos1)
+            pos_list1.append(my_pos1)
+            stamp_id1 = snake1.stamp()
+            stamp_list1.append(stamp_id1)
+        start = 10
+        make_food()
+        move_snake()
+        move_snake1()
 
 ###
 if level == "2":
@@ -67,11 +100,12 @@ if level == "2":
     turtle3.goto(0,-200)
     turtle3.color("yellow")
     turtle3.write("In addition, he is SLOWER than the other", font = ("Ariel", 30), align="center")
-    time.sleep(5)
-    turtle.clear()
-    turtle1.clear()
-    turtle2.clear()
-    turtle3.clear()
+    turtle4.goto(0,-300)
+    turtle4.color("black")
+    turtle4.write("Press the space bar to start the game!", font = ("Ariel", 30), align="center")
+    turtle.onkeypress(clear_text, 'space')
+    turtle.listen()
+
 
 elif level == "1":
     turtle.goto(0,200)
@@ -84,11 +118,12 @@ elif level == "1":
     turtle2.write("The yellow snake player plays with the W,S,A,D keys", font = ("Ariel", 28), align="center")
     turtle3.goto(0,-200)
     turtle3.color("yellow")
-    time.sleep(5)
-    turtle.clear()
-    turtle1.clear()
-    turtle2.clear()
-    turtle3.clear()
+    turtle4.goto(0,-300)
+    turtle4.color("black")
+    turtle4.write("Press the space bar to start the game!", font = ("Ariel", 30), align="center")
+    turtle.onkeypress(clear_text, 'space')
+    turtle.listen()
+
 ###
 
 snake = turtle.clone()
@@ -103,26 +138,6 @@ snake1.color('yellow')
 snake.home()
 snake1.home()
 ###
-
-for num in range(start_length):
-        x_pos = snake.pos()[0]
-        y_pos = snake.pos()[1]
-        x_pos = x_pos + square_size
-        my_pos = (x_pos, y_pos)
-        snake.goto(my_pos)
-        pos_list.append(my_pos)
-        stamp_id = snake.stamp()
-        stamp_list.append(stamp_id)
-
-for num1 in range(start_length):
-        x_pos1 = snake1.pos()[0]
-        y_pos1 = snake1.pos()[1]
-        x_pos1 = x_pos1 + square_size
-        my_pos1 = (x_pos1, y_pos1)
-        snake1.goto(my_pos1)
-        pos_list1.append(my_pos1)
-        stamp_id1 = snake1.stamp()
-        stamp_list1.append(stamp_id1)
 
 UP_ARROW = "Up"
 LEFT_ARROW = "Left"
@@ -429,7 +444,6 @@ def move_snake1():
         
     turtle.ontimer(move_snake1, TIME_STEP1)
 
-
-move_snake()
+'''move_snake()
 move_snake1()
-make_food()
+make_food()'''
