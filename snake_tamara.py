@@ -1,7 +1,16 @@
 import turtle
 import random
 import time
+  
 
+
+level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2")
+if level == '1':
+    TIME_STEP = 100
+    TIME_STEP1 = 100
+elif level == '2':
+    TIME_STEP = 50
+    TIME_STEP1 = 150
 
 turtle.tracer(1, 0)
 
@@ -37,23 +46,41 @@ turtle2 = turtle.clone()
 turtle2.hideturtle()
 
 ###
-turtle.goto(0,200)
-turtle.color("blue")
-turtle.write("The blue snake player plays with the arrow keys", font = ("Ariel", 30), align="center")
-turtle1.goto(0,100)
-turtle1.color("blue")
-turtle1.write("In addition, he is FASTER than the other", font = ("Ariel", 30), align="center")
-turtle2.goto(0,-100)
-turtle2.color("yellow")
-turtle2.write("The yellow snake player plays with the W,S,A,D keys", font = ("Ariel", 28), align="center")
-turtle3.goto(0,-200)
-turtle3.color("yellow")
-turtle3.write("In addition, he is SLOWER than the other", font = ("Ariel", 30), align="center")
-time.sleep(5)
-turtle.clear()
-turtle1.clear()
-turtle2.clear()
-turtle3.clear()
+if level == "2":
+    turtle.goto(0,200)
+    turtle.color("blue")
+    turtle.write("The blue snake player plays with the arrow keys", font = ("Ariel", 30), align="center")
+    turtle1.goto(0,100)
+    turtle1.color("blue")
+    turtle1.write("In addition, he is FASTER than the other", font = ("Ariel", 30), align="center")
+    turtle2.goto(0,-100)
+    turtle2.color("yellow")
+    turtle2.write("The yellow snake player plays with the W,S,A,D keys", font = ("Ariel", 28), align="center")
+    turtle3.goto(0,-200)
+    turtle3.color("yellow")
+    turtle3.write("In addition, he is SLOWER than the other", font = ("Ariel", 30), align="center")
+    time.sleep(5)
+    turtle.clear()
+    turtle1.clear()
+    turtle2.clear()
+    turtle3.clear()
+
+elif level == "1":
+    turtle.goto(0,200)
+    turtle.color("blue")
+    turtle.write("The blue snake player plays with the arrow keys", font = ("Ariel", 30), align="center")
+    turtle1.goto(0,100)
+    turtle1.color("blue")
+    turtle2.goto(0,-100)
+    turtle2.color("yellow")
+    turtle2.write("The yellow snake player plays with the W,S,A,D keys", font = ("Ariel", 28), align="center")
+    turtle3.goto(0,-200)
+    turtle3.color("yellow")
+    time.sleep(5)
+    turtle.clear()
+    turtle1.clear()
+    turtle2.clear()
+    turtle3.clear()
 ###
 
 snake = turtle.clone()
@@ -100,10 +127,7 @@ UP_ARROW1 = "w"
 DOWN_ARROW1 = "s"
 
 
-#
-TIME_STEP = 100
-TIME_STEP1 = 100
-#
+
 
 SPACEBAR = "space"
 
@@ -203,6 +227,8 @@ food.shape("sushi.gif")
 food.hideturtle()
 food_pos = []
 food_stamps = []
+
+
 def make_food():
     
     min_x = -int(size_X/2/square_size)+1
