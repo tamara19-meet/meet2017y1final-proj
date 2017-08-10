@@ -1,7 +1,24 @@
 import turtle
 import random
 import time
+import pygame
+from pygame.locals import *
+pygame.mixer.pre_init(44100,16,2,4096)
+pygame.init()
+pygame.mixer.music.load("TheFatRat - Unity.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+print("play music")
+  
 
+
+level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2")
+if level == '1':
+    TIME_STEP = 100
+    TIME_STEP1 = 100
+elif level == '2':
+    TIME_STEP = 50
+    TIME_STEP1 = 150
 
 turtle.tracer(1, 0)
 
@@ -12,8 +29,12 @@ size_X=700
 size_Y=400
 turtle.penup()
 
+
 square_size = 20
 start_length = 5
+wn=turtle.Screen()
+wn.title("2 players snake")
+
 
 pos_list = []
 stamp_list = []
@@ -25,17 +46,64 @@ score = []
 score1 = []
 
 turtle1 = turtle.clone()
+turtle.hideturtle()
+turtle1.hideturtle()
+turtle3= turtle.clone()
+turtle3.hideturtle()
+turtle2 = turtle.clone()
+turtle2.hideturtle()
+
+###
+if level == "2":
+    turtle.goto(0,200)
+    turtle.color("blue")
+    turtle.write("The blue snake player plays with the arrow keys", font = ("Ariel", 30), align="center")
+    turtle1.goto(0,100)
+    turtle1.color("blue")
+    turtle1.write("In addition, he is FASTER than the other", font = ("Ariel", 30), align="center")
+    turtle2.goto(0,-100)
+    turtle2.color("yellow")
+    turtle2.write("The yellow snake player plays with the W,S,A,D keys", font = ("Ariel", 28), align="center")
+    turtle3.goto(0,-200)
+    turtle3.color("yellow")
+    turtle3.write("In addition, he is SLOWER than the other", font = ("Ariel", 30), align="center")
+    time.sleep(5)
+    turtle.clear()
+    turtle1.clear()
+    turtle2.clear()
+    turtle3.clear()
+
+elif level == "1":
+    turtle.goto(0,200)
+    turtle.color("blue")
+    turtle.write("The blue snake player plays with the arrow keys", font = ("Ariel", 30), align="center")
+    turtle1.goto(0,100)
+    turtle1.color("blue")
+    turtle2.goto(0,-100)
+    turtle2.color("yellow")
+    turtle2.write("The yellow snake player plays with the W,S,A,D keys", font = ("Ariel", 28), align="center")
+    turtle3.goto(0,-200)
+    turtle3.color("yellow")
+    time.sleep(5)
+    turtle.clear()
+    turtle1.clear()
+    turtle2.clear()
+    turtle3.clear()
+###
 
 snake = turtle.clone()
 snake.shape("square")
-snake.color('red')
+snake.color('blue')
 
 snake1 = turtle.clone()
 snake1.shape("square")
-snake1.color('green')
+snake1.color('yellow')
 
-turtle.hideturtle()
-turtle1.hideturtle()
+###
+snake.home()
+snake1.home()
+###
+
 for num in range(start_length):
         x_pos = snake.pos()[0]
         y_pos = snake.pos()[1]
@@ -68,14 +136,6 @@ DOWN_ARROW1 = "s"
 
 
 
-TIME_STEP = 100
-TIME_STEP1 = 100
-<<<<<<< HEAD
-
-=======
->>>>>>> 98befa20549bf32907bc390cdfd491f25a079bb5
-TIME_STEP = 50
-TIME_STEP1=200
 
 SPACEBAR = "space"
 
@@ -100,7 +160,7 @@ LEFT_EDGE = -450
 box=turtle.clone()
 box.shape("blank")
 box.pensize(2)
-box.color("blue")
+box.color("green")
 box.penup()
 box.goto(-450,300)
 box.pendown()
@@ -175,7 +235,10 @@ food.shape("sushi.gif")
 food.hideturtle()
 food_pos = []
 food_stamps = []
+
 def make_food():
+
+    global pos_list
     
     min_x = -int(size_X/2/square_size)+1
     max_x = int(size_X/2/square_size)-1
@@ -186,11 +249,15 @@ def make_food():
     food_y = random.randint(min_y, max_y)*square_size
 
     pos_food = (food_x, food_y)
-    
-    food.goto(food_x, food_y)
-    food_id = food.stamp()
-    food_stamps.append(food_id)
-    food_pos.append(pos_food)
+
+    if pos_food in pos_list:
+        make_food()
+    else:
+        food.goto(food_x, food_y)
+        food_id = food.stamp()
+        food_stamps.append(food_id)
+        food_pos.append(pos_food)
+
 
 #make turtle move snake
 def move_snake():
@@ -243,27 +310,32 @@ def move_snake():
     new_y_pos = new_pos[1]
 
     if new_x_pos >= RIGHT_EDGE:
-        turtle.write("Player 1 hit the right edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.write("The blue snake hit the right edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_x_pos <= LEFT_EDGE:
-        turtle.write("Player 1 hit the left edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.write("The blue snake hit the left edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos >= UP_EDGE:
-        turtle.write("Player 1 hit the up edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.write("The blue snake hit the up edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos <= DOWN_EDGE:
-        turtle.write("Player 1 hit the down edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.write("The blue snake hit the down edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit(pos_list)
         
     if pos_list[-1] in pos_list[0:-1]:
-        turtle.write("Player 1 hit yourself!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.write("The blue snake hit herself!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
         
@@ -307,6 +379,7 @@ def move_snake1():
         make_food()
         turtle1.clear()
         turtle1.goto(-200, 200)
+        turtle1.color("yellow")
         turtle1.write(len(score1), font = ("Arial", 30), align="center")
         turtle1.goto(-300, 0)
     else:
@@ -320,27 +393,37 @@ def move_snake1():
     new_y_pos1 = new_pos1[1]
 
     if new_x_pos1 >= RIGHT_EDGE:
-        turtle.write("Player 2 hit the right edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.color("yellow")
+        turtle.write("The yellow snake hit the right edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_x_pos1 <= LEFT_EDGE:
-        turtle.write("Player 2 hit the left edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.color("yellow")
+        turtle.write("The yellow snake hit the left edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos1 >= UP_EDGE:
-        turtle.write("Player 2 hit the up edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.color("yellow")
+        turtle.write("The yellow snake hit the up edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
 
     elif new_y_pos1 <= DOWN_EDGE:
-        turtle.write("Player 2 hit the down edge! game over!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.color("yellow")
+        turtle.write("The yellow snake hit the down edge! game over!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit(pos_list)
         
     if pos_list1[-1] in pos_list1[0:-1]:
-        turtle.write("Player 2 hit yourself!", font = ("Ariel", 30), align="center")
+        turtle.goto(0,0)
+        turtle.color("yellow")
+        turtle.write("The yellow snake hit himself!", font = ("Ariel", 30), align="center")
         time.sleep(2)
         quit()
         
@@ -350,4 +433,9 @@ def move_snake1():
 move_snake()
 move_snake1()
 make_food()
+
+
+
+
+
 
