@@ -13,7 +13,7 @@ pygame.mixer.music.play(-1)
   
 
 
-level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2 and press enter")
+level = input("In level 1, both snakes' speeds are the same. In level 2, they are different!   Pick a level 1/2 and press enter ")
 if level == '1':
     TIME_STEP = 100
     TIME_STEP1 = 100
@@ -35,7 +35,7 @@ start = 1
 square_size = 20
 start_length = 5
 wn=turtle.Screen()
-wn.title("TDGM Snake")
+wn.title("The best game!")
 
 
 pos_list = []
@@ -172,20 +172,20 @@ direction1 = DOWN1
 
 UP_EDGE = 300
 DOWN_EDGE = -300
-RIGHT_EDGE = 450
-LEFT_EDGE = -450
+RIGHT_EDGE = 490
+LEFT_EDGE = -490
 
 box=turtle.clone()
 box.shape("blank")
 box.pensize(2)
 box.color("green")
 box.penup()
-box.goto(-450,300)
+box.goto(-490,300)
 box.pendown()
-box.goto(450,300)
-box.goto(450,-300)
-box.goto(-450,-300)
-box.goto(-450,300)
+box.goto(490,300)
+box.goto(490,-300)
+box.goto(-490,-300)
+box.goto(-490,300)
 
 #call functions
 def up():
