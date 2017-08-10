@@ -9,6 +9,11 @@ pygame.mixer.music.load("TheFatRat - Unity.mp3")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
 #print("play music")
+<<<<<<< HEAD
+=======
+  
+
+>>>>>>> 3cde17844770f25cbb250e08a79b259274e3cf3b
 
 level = input("In level 1, both snakes' speeds are the same. In level 2, they are different! Pick a level 1/2 and press enter")
 if level == '1':
